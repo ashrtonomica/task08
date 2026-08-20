@@ -66,7 +66,7 @@ function BridgePage() {
 
         <Explainer />
 
-        <HistoryTable />
+        <HistoryTable {...(wallet.address ? { walletAddress: wallet.address } : {})} />
 
         <ResourceButtons />
 
