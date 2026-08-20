@@ -41,7 +41,7 @@ export function FaucetLinks() {
   return (
     <section className="space-y-4 rounded-lg border border-[#3a4650] bg-[#1e2a31] p-5">
       <div className="space-y-1">
-        <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#ffb3ae]">
+        <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-accent">
           Testnet faucets
         </p>
         <p className="text-base leading-normal text-muted-foreground">
