@@ -22,7 +22,7 @@ export function TestnetWarning() {
       </svg>
       <p className="text-base font-normal leading-normal text-[#ffb3ae]">
         This is a testnet demo. <span className="font-semibold">Do not send real funds.</span> ETH
-        locked on Sepolia can be reclaimed by reaching out to support through the contact form.
+        locked on Sepolia can be reclaimed by reaching out to contact support.
       </p>
     </div>
   );
