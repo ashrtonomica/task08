@@ -1,9 +1,8 @@
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ethLogo from "@/assets/eth-logo.png";
-import wethRbLogo from "@/assets/wethrb-logo.png";
 
-import { REDBELLY_CHAIN_ID, SEPOLIA_CHAIN_ID, shorten } from "@/lib/bridge";
+import { SEPOLIA_CHAIN_ID, REDBELLY_CHAIN_ID, shorten } from "@/lib/bridge";
+
 
 const chainLabel = (chainId?: number) => {
   if (chainId === SEPOLIA_CHAIN_ID) return "Ethereum Sepolia";
@@ -34,16 +33,8 @@ export function Header({
             alt="Redbelly DAO"
             className="h-9 w-auto shrink-0 self-center object-contain"
           />
-          <div>
-            <p className="text-base font-medium leading-tight text-foreground">Redbridge</p>
-            <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
-              <img src={ethLogo} alt="Ethereum" className="size-4 object-contain" />
-              Sepolia ETH →
-              <img src={wethRbLogo} alt="WETH.rb" className="h-4 w-4 object-contain" />
-              Redbelly WETH.rb
-            </p>
-          </div>
         </div>
+
 
 
         <div className="flex items-center gap-3">
