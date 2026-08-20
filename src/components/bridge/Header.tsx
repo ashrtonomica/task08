@@ -70,7 +70,7 @@ export function WarningBanner() {
         <AlertTriangle className="mt-0.5 size-5 shrink-0 text-[#EF5350]" strokeWidth={1.8} />
         <p className="text-base font-normal leading-normal text-[#ffb3ae]">
           <span className="font-semibold">This is a testnet demo. Do not send real funds.</span> ETH
-          locked on Sepolia can be reclaimed by reaching out to support through the contact form.
+          locked on Sepolia can be reclaimed by reaching out to contact support.
         </p>
       </div>
     </div>
