@@ -66,7 +66,10 @@ function BridgePage() {
 
         <Explainer />
 
-        <HistoryTable {...(wallet.address ? { walletAddress: wallet.address } : {})} />
+        <HistoryTable
+          {...(wallet.address ? { walletAddress: wallet.address } : {})}
+          onConnect={() => void wallet.connect()}
+        />
 
         <ResourceButtons />
 
