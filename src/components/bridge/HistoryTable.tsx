@@ -44,7 +44,7 @@ function formatTime(ms: number) {
   });
 }
 
-export function HistoryTable() {
+export function HistoryTable({ walletAddress }: { walletAddress?: string }) {
   const [offset, setOffset] = useState(0);
   const [ticket, setTicket] = useState<SupportTicketPrefill | undefined>();
   const { rows: fetched, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
@@ -63,6 +63,29 @@ export function HistoryTable() {
           <p className="mt-1 text-sm text-muted-foreground">
             All bridge transactions, tracked live against both chains.
           </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              setTicket({ ...(walletAddress ? { walletAddress } : {}) })
+            }
+          >
+            Contact Support
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              setTicket({
+                ...(walletAddress ? { walletAddress } : {}),
+                description: "Requesting emergency withdrawal for stuck lock.",
+              })
+            }
+          >
+            Reclaim
+          </Button>
         </div>
       </div>
 
@@ -131,6 +154,7 @@ export function HistoryTable() {
                             txHash: row.sepoliaTxHash,
                             walletAddress: row.sender,
                             amount: formatEther(BigInt(row.amountWei)),
+                            locked: true,
                           })
                         }
                         className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#EF5350] hover:underline"
@@ -189,7 +213,7 @@ export function HistoryTable() {
 
       {ticket ? (
         <SupportTicketDialog
-          key={ticket.txHash}
+          key={ticket.txHash ?? ticket.description ?? "blank"}
           open
           onOpenChange={(next) => {
             if (!next) setTicket(undefined);
