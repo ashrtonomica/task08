@@ -29,12 +29,28 @@ function StatusPill({ row }: { row: BridgeHistoryRow }) {
   );
 }
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
+
+function formatTime(ms: number) {
+  const diff = Date.now() - ms;
+  if (diff < 60_000) return "just now";
+  if (diff < 60 * 60_000) return `${Math.floor(diff / 60_000)}m ago`;
+  if (diff < 24 * 60 * 60_000) return `${Math.floor(diff / (60 * 60_000))}h ago`;
+  return new Date(ms).toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export function HistoryTable() {
   const [offset, setOffset] = useState(0);
   const [ticket, setTicket] = useState<SupportTicketPrefill | undefined>();
-  const { rows, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
+  const { rows: fetched, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
+  // Guard against an API that ignores limit/offset: slice locally as well.
+  const rows =
+    fetched.length > PAGE_SIZE ? fetched.slice(offset, offset + PAGE_SIZE) : fetched;
   const rangeStart = total === 0 ? 0 : offset + 1;
   const rangeEnd = Math.min(offset + PAGE_SIZE, total);
 
@@ -59,6 +75,7 @@ export function HistoryTable() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="px-6 py-3 font-medium">Time</th>
                 <th className="px-6 py-3 font-medium">Amount</th>
                 <th className="px-6 py-3 font-medium">Recipient</th>
                 <th className="px-6 py-3 font-medium">Sepolia lock</th>
@@ -72,6 +89,12 @@ export function HistoryTable() {
                   key={`${row.sourceChainId}-${row.sourceNonce}`}
                   className="border-b border-border last:border-b-0"
                 >
+                  <td
+                    className="whitespace-nowrap px-6 py-4 font-mono text-xs text-muted-foreground"
+                    title={new Date(row.lockedAt).toLocaleString()}
+                  >
+                    {formatTime(row.lockedAt)}
+                  </td>
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-foreground">
                     <span className="inline-flex items-center gap-2">
                       <img src={ethLogo} alt="" className="size-4 object-contain" />
