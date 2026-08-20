@@ -5,6 +5,7 @@ import { FaucetLinks } from "@/components/bridge/FaucetLinks";
 import { FooterLinks } from "@/components/bridge/FooterLinks";
 import { Header, WarningBanner } from "@/components/bridge/Header";
 import { HistoryTable } from "@/components/bridge/HistoryTable";
+import { ResourceButtons } from "@/components/bridge/ResourceButtons";
 import { useBridgeTransfers } from "@/hooks/useBridgeTransfers";
 import { useWallet } from "@/hooks/useWallet";
 import { LOCK_VAULT_ADDRESS, WETH_RB_ADDRESS, shorten } from "@/lib/bridge";
@@ -62,6 +63,8 @@ function BridgePage() {
           onCreate={addTransfer}
           onUpdate={updateTransfer}
         />
+
+        <ResourceButtons />
 
         <Explainer />
 

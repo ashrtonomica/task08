@@ -35,6 +35,7 @@ function WaitingTimer({ startedAt }: { startedAt: number }) {
 }
 
 export function StatusTimeline({ transfer }: { transfer: Transfer }) {
+  const [dismissed, setDismissed] = useState(false);
   const { rows } = useBridgeHistory();
   const row =
     transfer.nonce !== undefined
@@ -70,9 +71,30 @@ export function StatusTimeline({ transfer }: { transfer: Transfer }) {
     },
   ];
 
+  if (dismissed) return null;
+
   return (
-    <div className="space-y-5 rounded-lg border border-border bg-secondary/60 p-5">
-      <div className="flex items-center justify-between">
+    <div className="relative space-y-5 rounded-lg border border-border bg-secondary/60 p-5">
+      <button
+        type="button"
+        onClick={() => setDismissed(true)}
+        aria-label="Dismiss transfer status"
+        className="absolute right-3 top-3 text-[#93a4ae] transition-colors hover:text-[#e4ebf0]"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          aria-hidden="true"
+        >
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+      <div className="flex items-center justify-between pr-8">
         <p className="text-sm font-medium text-foreground">Transfer status</p>
         {transfer.nonce !== undefined ? (
           <span className="text-xs text-muted-foreground">Lock nonce #{transfer.nonce}</span>
