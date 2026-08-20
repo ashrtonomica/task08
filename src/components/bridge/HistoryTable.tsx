@@ -12,6 +12,7 @@ import {
   SupportTicketDialog,
   type SupportTicketPrefill,
 } from "@/components/bridge/SupportTicketDialog";
+import { MyTicketsDialog } from "@/components/bridge/MyTicketsDialog";
 import { redbellyTxUrl, sepoliaTxUrl, shorten } from "@/lib/bridge";
 
 const STUCK_AFTER_MS = 5 * 60 * 1000;
@@ -44,8 +45,15 @@ function formatTime(ms: number) {
   });
 }
 
-export function HistoryTable({ walletAddress }: { walletAddress?: string }) {
+export function HistoryTable({
+  walletAddress,
+  onConnect,
+}: {
+  walletAddress?: string;
+  onConnect?: () => void;
+}) {
   const [offset, setOffset] = useState(0);
+  const [myTicketsOpen, setMyTicketsOpen] = useState(false);
   const [ticket, setTicket] = useState<SupportTicketPrefill | undefined>();
   const { rows: fetched, total, loading, error } = useBridgeHistory(15000, PAGE_SIZE, offset);
   // Guard against an API that ignores limit/offset: slice locally as well.
@@ -85,6 +93,9 @@ export function HistoryTable({ walletAddress }: { walletAddress?: string }) {
             }
           >
             Reclaim
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setMyTicketsOpen(true)}>
+            My Tickets
           </Button>
         </div>
       </div>
@@ -210,6 +221,13 @@ export function HistoryTable({ walletAddress }: { walletAddress?: string }) {
           </Button>
         </div>
       </div>
+
+      <MyTicketsDialog
+        open={myTicketsOpen}
+        onOpenChange={setMyTicketsOpen}
+        {...(walletAddress ? { walletAddress } : {})}
+        {...(onConnect ? { onConnect } : {})}
+      />
 
       {ticket ? (
         <SupportTicketDialog
