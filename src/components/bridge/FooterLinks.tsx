@@ -1,3 +1,5 @@
+import { ARTICLE_URL, DOCS_VIEWER_URL, PDF_VIEWER_URL } from "@/lib/links";
+
 const REPO = "https://github.com/0xDarkSeidBull/daotask8";
 
 const iconClass =
@@ -33,7 +35,7 @@ export function FooterLinks() {
         </a>
 
         <a
-          href={`${REPO}/blob/main/Redbridge-Technical-Guide.pdf`}
+          href={PDF_VIEWER_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Technical guide PDF"
@@ -56,7 +58,7 @@ export function FooterLinks() {
         </a>
 
         <a
-          href={`${REPO}/blob/main/Redbridge-Technical-Guide.docx`}
+          href={DOCS_VIEWER_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Technical guide document"
@@ -80,7 +82,7 @@ export function FooterLinks() {
         </a>
 
         <a
-          href="https://dev.to/0xdarkseidbull/how-to-bridge-eth-from-ethereum-sepolia-to-redbelly-network-testnet-a-complete-lock-and-mint-4i88"
+          href={ARTICLE_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Dev.to article"

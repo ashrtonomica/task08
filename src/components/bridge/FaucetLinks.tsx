@@ -1,7 +1,4 @@
-const RBNT_FAUCETS = [
-  { label: "Redbelly Vine", href: "https://vine.redbelly.network/native-currency/testing-coins/" },
-  { label: "FaucetMe", href: "https://redbelly.faucetme.pro/" },
-];
+const RBNT_FAUCETS = [{ label: "FaucetMe", href: "https://redbelly.faucetme.pro/" }];
 
 const SEPOLIA_FAUCETS = [
   { label: "Alchemy", href: "https://www.alchemy.com/faucets/ethereum-sepolia" },

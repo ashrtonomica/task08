@@ -10,6 +10,8 @@ import { Slider } from "@/components/ui/slider";
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
 import { StatusTimeline } from "@/components/bridge/StatusTimeline";
+import { TestnetWarning } from "@/components/bridge/TestnetWarning";
+import { CHAINLIST_SEPOLIA_URL } from "@/lib/links";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
 import { useWallet } from "@/hooks/useWallet";
 import {
@@ -295,6 +297,8 @@ export function BridgePanel({
           </div>
         </div>
 
+        <TestnetWarning />
+
         <div className="space-y-2">
           <div className="flex items-baseline justify-between">
             <Label htmlFor="amount">Amount to bridge</Label>
@@ -357,6 +361,17 @@ export function BridgePanel({
             <p className="text-sm text-accent">Reduced to leave room for gas fees.</p>
           ) : null}
           {amountError ? <p className="text-sm text-accent">{amountError}</p> : null}
+          <p className="text-sm text-muted-foreground">
+            RPC not responding?{" "}
+            <a
+              href={CHAINLIST_SEPOLIA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-accent hover:underline"
+            >
+              Change RPC URL
+            </a>
+          </p>
         </div>
 
         <div className="flex justify-center">
@@ -421,7 +436,9 @@ export function BridgePanel({
           </button>
         ) : null}
 
-        {activeTransfer ? <StatusTimeline transfer={activeTransfer} /> : null}
+        {activeTransfer ? (
+          <StatusTimeline key={activeTransfer.id} transfer={activeTransfer} />
+        ) : null}
       </div>
     </Card>
   );
