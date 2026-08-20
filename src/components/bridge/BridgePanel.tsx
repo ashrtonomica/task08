@@ -10,7 +10,6 @@ import { Slider } from "@/components/ui/slider";
 import ethLogo from "@/assets/eth-logo.png";
 import wethRbLogo from "@/assets/wethrb-logo.png";
 import { StatusTimeline } from "@/components/bridge/StatusTimeline";
-import { TestnetWarning } from "@/components/bridge/TestnetWarning";
 import { CHAINLIST_SEPOLIA_URL } from "@/lib/links";
 import type { Transfer } from "@/hooks/useBridgeTransfers";
 import { useWallet } from "@/hooks/useWallet";
@@ -296,8 +295,6 @@ export function BridgePanel({
             </div>
           </div>
         </div>
-
-        <TestnetWarning />
 
         <div className="space-y-2">
           <div className="flex items-baseline justify-between">

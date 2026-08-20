@@ -64,11 +64,11 @@ function BridgePage() {
           onUpdate={updateTransfer}
         />
 
-        <ResourceButtons />
-
         <Explainer />
 
         <HistoryTable />
+
+        <ResourceButtons />
 
         <footer className="space-y-5 border-t border-border pt-6 text-xs text-muted-foreground">
           <FooterLinks />
