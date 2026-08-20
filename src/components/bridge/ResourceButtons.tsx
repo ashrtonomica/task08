@@ -12,10 +12,10 @@ export function ResourceButtons() {
       <a href={PDF_VIEWER_URL} target="_blank" rel="noopener noreferrer" className={accentButtonClass}>
         Read PDF
       </a>
-      <a href={DOCS_VIEWER_URL} target="_blank" rel="noopener noreferrer" className={ghostButtonClass}>
+      <a href={DOCS_VIEWER_URL} target="_blank" rel="noopener noreferrer" className={accentButtonClass}>
         Read Docs
       </a>
-      <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer" className={ghostButtonClass}>
+      <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer" className={accentButtonClass}>
         Read Article
       </a>
     </div>
